@@ -1,12 +1,15 @@
+
 // ---- Define your dialogs  and panels here ----
 var effective_permissions = define_new_effective_permissions("permission", add_icon_col = true, which_permissions = null)
 // show side panel
 $('#sidepanel').append(effective_permissions)
 
-var user_selector = define_new_user_select_field("user", "select", on_user_change = function(selected_user){
+var user_selector = define_new_user_select_field("user", "Select user", on_user_change = function(selected_user){
     $('#permission').attr('username', selected_user)
     $('#permission').attr('filepath', '/C/presentation_documents/important_file.txt')
-    })
+    // !! need to make above line more general 
+    // $('#permission').attr('filepath', $(this).attr('username'))
+})
 // show user selector/append to side panel element
 $('#sidepanel').append(user_selector)
     
@@ -33,19 +36,12 @@ $('.perm_info').click(function(){
     var explanationText = get_explanation_text(explanation)
     
     new_dialog.empty().append(explanationText).dialog('open')
-
 })
 
+// tried to add the word Permissions next to lock button
+$('.permbutton').append('Permissions')
 
 // ---- Display file structure ----
-
-
-
-// define filepath and username attributes
-// $('#permission').attr('filepath', '/C')
-// $('#permission').attr('username', 'administrator')
-
-
 
 // (recursively) makes and returns an html element (wrapped in a jquery object) for a given file object
 function make_file_element(file_obj) {
